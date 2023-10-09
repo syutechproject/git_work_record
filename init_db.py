@@ -19,18 +19,18 @@ rev_hashed_password = hashed_password.decode()
 #     db.close()
 
 
-with app.app_context():
-    db = get_db()
-    cur = db.cursor()
-    cur.execute(
-        "insert into USERS (user_id, password, name)\
-            values('{user_id}', '{password}', '{name}')".format(
-            user_id=userid,
-            password=rev_hashed_password,
-            name=name)
-        )
-    db.commit()
-    db.close()
+# with app.app_context():
+#     db = get_db()
+#     cur = db.cursor()
+#     cur.execute(
+#         "insert into USERS (user_id, password, name)\
+#             values('{user_id}', '{password}', '{name}')".format(
+#             user_id=userid,
+#             password=rev_hashed_password,
+#             name=name)
+#         )
+#     db.commit()
+#     db.close()
 
 # with app.app_context():
 #     db = get_db()
@@ -39,15 +39,15 @@ with app.app_context():
 #     db.close()
 
 
-# with app.app_context():
-#     db = get_db()
-#     cur = db.cursor()
-#     cur.execute("CREATE TABLE USERS\
-#                ( user_id text primary key not null,\
-#                  password text not null,\
-#                  name text not null );")
-#     db.commit()
-#     db.close()
+with app.app_context():
+    db = get_db()
+    cur = db.cursor()
+    cur.execute("CREATE TABLE USERS\
+               ( user_id text primary key not null,\
+                 password text not null,\
+                 name text not null );")
+    db.commit()
+    db.close()
 
 
 # with app.app_context():
