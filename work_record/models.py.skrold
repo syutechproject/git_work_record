@@ -1,0 +1,46 @@
+import sqlite3
+import os
+from datetime import timedelta
+from flask import g
+from flask import redirect
+from flask_login import UserMixin
+from flask import Flask
+from flask_login import LoginManager
+
+
+app = Flask(__name__)
+
+app.secret_key = os.urandom(24)
+app.permanent_session_lifetime = timedelta(minutes=15)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+def get_db():
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sqlite3.connect('work_hours.db')
+        return db
+
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
+
+
+class User(UserMixin):
+    def __init__(self, userid):
+        self.id = userid
+
+
+@login_manager.user_loader
+def load_user(userid):
+    return User(userid)
+
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    return redirect('/work_recod/users/login')

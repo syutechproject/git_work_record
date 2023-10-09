@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width">
+    <title>直近の打刻</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/static/css/sanitize.css">
+    <link rel="stylesheet" href="/static/css/style_common.css">
+    <link rel="stylesheet" href="/static/css/style_check.css">
+
+</head>
+<body>
+    <div class="content">
+        <header>
+            <h1>直近の打刻</h1>
+        </header>
+        <form method="POST">
+            {% if clockInHistory == [] %}
+            <p>打刻情報はありません</p>
+            {% else %}
+            <div id ='maintable'></div>
+            <span id="clockInHistory" style="visibility: hidden;">{{clockInHistory}}</span>
+          {% endif %}
+        </form>
+        <a href="/work_record/home/" role="botton">タイムカード打刻画面へ戻る</a>
+        <footer>
+            &copy; 2023 AOKI AMANE
+        </footer>
+        
+        <script src="/static/js/clock_info_table.js" charset="UTF-8"></script>
+    </div>
+</body>
+</html>
+
+

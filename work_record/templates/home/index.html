@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width">
+    <title>出勤打刻</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/static/css/sanitize.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style_common.css">
+
+</head>
+<body>
+    <div class="content">
+        <header>
+            <h1>出勤打刻</h1>
+        </header>
+        <p style="color: red">{{error_message}}</p>
+        <p>{{user_name}}</p>
+        <a href="/work_record/clockin_check/check">直近の打刻</a>
+        <a href="/work_record/clockin_help/help">Help</a>
+        <p id="viewDay"></p>
+        <p id="viewTime"></p>
+        <p id="latestClockIn"></p>
+        <form method="POST">
+            <p id="test">
+                <button type="submit" id="start" name="clockin_div" value="start">開始</button>
+                <button type="submit" id="finish" name="clockin_div" value="finish" >終了</button>
+            </p>
+            <p>
+                <button type="submit" id="stop" name="clockin_div" value="stop" >中断</button>
+                <button type="submit" id="resume" name="clockin_div" value="resume" >再開</button>
+            </p>
+        </form>
+        <a id="logout" href="/work_record/users/logout">ログアウト</a>
+        <span id="latestClockInDiv" style="visibility: hidden;">{{latestClockInDiv}}</span>
+        <footer>
+            &copy; 2023 AOKI AMANE
+        </footer>
+        
+        <script src="/static/js/clock.js" charset="UTF-8"></script>
+        <script src="/static/js/is_diabled_button.js" charset="UTF-8"></script>
+        <script src="/static/js/latest_clockIn_info.js" charset="UTF-8"></script>
+    </div>
+</body>
+</html>
+
+

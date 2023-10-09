@@ -1,0 +1,20 @@
+table{
+  /* ˜gü‚ğ1–{üw’è */
+   border: solid 1px;
+   border-collapse: collapse;
+   white-space: nowrap;
+   width: 100%;
+}
+
+th{
+      /* ƒwƒbƒ_”wŒi“h‚è‚Â‚Ô‚µ */
+      background: #eee;
+      text-align: center;
+    }
+
+th,td {
+     /* ˜gü‚ğ1–{üw’è */
+      border: solid 1px;
+      width:auto;
+   }
+

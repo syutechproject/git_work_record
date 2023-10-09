@@ -1,0 +1,13 @@
+from work_recod.users.views import users
+from work_recod.error_page.views import error_page
+from work_recod.clockin_help.views import clockin_help
+from work_recod.clockin_check.views import clockin_check
+from work_recod.home.views import home
+from work_recod.models import app
+
+
+app.register_blueprint(users)
+app.register_blueprint(clockin_check)
+app.register_blueprint(clockin_help)
+app.register_blueprint(error_page)
+app.register_blueprint(home)
