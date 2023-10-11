@@ -20,7 +20,6 @@ def login():
     user_id = ''
 
     if request.method == 'POST':
-        session.permanent = True
         user_id = request.form.get('user_id')
         password = request.form.get('password')
 
@@ -38,6 +37,7 @@ def login():
             if bcrypt.check_password_hash(db_password, password):
                 user = User(user_id)
                 login_user(user)
+                session.permanent = True
                 session["user_id"] = user_id
                 session["user_name"] = person[2]
                 return redirect('/work_record/home/')
