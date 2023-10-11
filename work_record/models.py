@@ -10,7 +10,8 @@ from flask_login import LoginManager
 
 app = Flask(__name__)
 
-app.secret_key = os.urandom(24)
+# app.secret_key = os.urandom(24)
+app.secret_key = "secret user"
 app.permanent_session_lifetime = timedelta(minutes=15)
 
 login_manager = LoginManager()
