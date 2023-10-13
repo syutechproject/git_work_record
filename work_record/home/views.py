@@ -16,8 +16,6 @@ home = Blueprint('home', __name__, url_prefix='/work_record/home')
 
 def sql_select(user_id, clockin_div, yyyy_mm_dd, cur):
     CLOCKIN_DIV = {"start": "1", "finish": "2", "stop": "3", "resume": "4"}
-    logging.warning(
-        "#########" + CLOCKIN_DIV[clockin_div] + "select SQL Start#########")
 
     cur.execute(
         "select max(serno) from CLOCKIN_INFO \
@@ -31,10 +29,6 @@ def sql_select(user_id, clockin_div, yyyy_mm_dd, cur):
 
 def sql_insert(user_id, clockin_div, yyyy_mm_dd, strSerno, hh_mm_ss, cur):
     CLOCKIN_DIV = {"start": "1", "finish": "2", "stop": "3", "resume": "4"}
-    logging.warning(
-        "#########" + CLOCKIN_DIV[clockin_div] + "insert SQL Start#########")
-    logging.warning("#####yyyy_mm_dd=" + yyyy_mm_dd + "######")
-    logging.warning("#####hh_mm_ss" + hh_mm_ss + "######")
     sqlResult = cur.execute(
         "insert into CLOCKIN_INFO \
             (user_id, clockin_date, clockin_div, serno, clockin_time) \
@@ -56,41 +50,21 @@ def work_record():
 
     nowDate = datetime.datetime.now(datetime.timezone
                                     (datetime.timedelta(hours=9)))
-    logging.warning("####nowDate####")
-    logging.warning(nowDate)
     now_hour = nowDate.hour
     now_minute = nowDate.minute
     now_second = nowDate.second
-    logging.warning("####now_hour####")
-    logging.warning(now_hour)
-    logging.warning("####now_minute####")
-    logging.warning(now_minute)
-    logging.warning("####now_second####")
-    logging.warning(now_second)
     str_hh_mm_ss = str(now_hour) + ":" + str(now_minute) + \
         ":" + str(now_second)
     now_hh_mm_ss = datetime.datetime.strptime(str_hh_mm_ss, '%H:%M:%S')
-    # TODO: このあたりでGMT⇒JSTへの変換が必要だと思う。
-    logging.warning("####str_hh_mm_ss####")
-    logging.warning(str_hh_mm_ss)
-    logging.warning("####now_hh_mm_ss####")
-    logging.warning(now_hh_mm_ss)
     strSys_time_from = "00:00:00"
     strSys_time_to = "05:00:00"
 
     sys_time_from = datetime.datetime.strptime(strSys_time_from, '%H:%M:%S')
     sys_time_to = datetime.datetime.strptime(strSys_time_to, '%H:%M:%S')
-    logging.warning("####sys_time_from####")
-    logging.warning(sys_time_from)
-    logging.warning("####sys_time_to####")
-    logging.warning(sys_time_to)
     if now_hh_mm_ss >= sys_time_from and now_hh_mm_ss < sys_time_to:
         yesterday = nowDate - timedelta(1)
         yyyy_mm_dd = yesterday.strftime('%Y-%m-%d')
         str_hh = str(int(str(now_hour)) + 24)
-        logging.warning("####24時～29時です####")
-        logging.warning("####str_hh####")
-        logging.warning(str_hh)
     else:
         yyyy_mm_dd = nowDate.strftime('%Y-%m-%d')
         str_hh = str(now_hour)
@@ -104,8 +78,6 @@ def work_record():
     if len(str_ss) == 1:
         str_ss = "0" + str_ss
     hh_mm_ss = str_hh + ":" + str_mm + ":" + str_ss
-    logging.warning("####hh_mm_ss####")
-    logging.warning(hh_mm_ss)
 
     if request.method == 'POST':
         if request.form.get("clockin_div", None) == "start":
@@ -206,10 +178,6 @@ def work_record():
     )
     latestClockInDiv = cur.fetchone()
     cur.close()
-    logging.warning("#########latestClockInDivの取得結果#########")
-    logging.warning(latestClockInDiv)
-    logging.warning("#########yyyy_mm_dd#########")
-    logging.warning(yyyy_mm_dd)
     user_name = session.get("user_name")
     return render_template('home/index.html', error_message=error_message,
                            user_name=user_name,
