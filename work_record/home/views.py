@@ -54,7 +54,8 @@ def work_record():
     user_id = session.get("user_id")
     logging.warning(user_id)
 
-    nowDate = datetime.datetime.now()
+    nowDate = datetime.datetime.now(datetime.timezone
+                                    (datetime.timedelta(hours=9)))
     logging.warning("####nowDate####")
     logging.warning(nowDate)
     now_hour = nowDate.hour
@@ -87,15 +88,22 @@ def work_record():
         yesterday = nowDate - timedelta(1)
         yyyy_mm_dd = yesterday.strftime('%Y-%m-%d')
         str_hh = str(int(str(now_hour)) + 24)
-        hh_mm_ss = str_hh + ":" + str(now_minute) + ":" + str(now_second)
         logging.warning("####24時～29時です####")
         logging.warning("####str_hh####")
         logging.warning(str_hh)
-
     else:
         yyyy_mm_dd = nowDate.strftime('%Y-%m-%d')
-        hh_mm_ss = nowDate.strftime('%H:%M:%S')
+        str_hh = str(now_hour)
 
+    str_mm = str(now_minute)
+    str_ss = str(now_second)
+    if len(str_hh) == 1:
+        str_hh = "0" + str_hh
+    if len(str_mm) == 1:
+        str_mm = "0" + str_mm
+    if len(str_ss) == 1:
+        str_ss = "0" + str_ss
+    hh_mm_ss = str_hh + ":" + str_mm + ":" + str_ss
     logging.warning("####hh_mm_ss####")
     logging.warning(hh_mm_ss)
 
