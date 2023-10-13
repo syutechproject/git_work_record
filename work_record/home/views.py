@@ -33,7 +33,8 @@ def sql_insert(user_id, clockin_div, yyyy_mm_dd, strSerno, hh_mm_ss, cur):
     CLOCKIN_DIV = {"start": "1", "finish": "2", "stop": "3", "resume": "4"}
     logging.warning(
         "#########" + CLOCKIN_DIV[clockin_div] + "insert SQL Start#########")
-
+    logging.warning("#####yyyy_mm_dd=" + yyyy_mm_dd + "######")
+    logging.warning("#####hh_mm_ss" + hh_mm_ss + "######")
     sqlResult = cur.execute(
         "insert into CLOCKIN_INFO \
             (user_id, clockin_date, clockin_div, serno, clockin_time) \
@@ -54,6 +55,8 @@ def work_record():
     logging.warning(user_id)
 
     nowDate = datetime.datetime.now()
+    logging.warning("####nowDate####")
+    logging.warning(nowDate)
     now_hour = nowDate.hour
     now_minute = nowDate.minute
     now_second = nowDate.second
