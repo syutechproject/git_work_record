@@ -60,25 +60,44 @@ def work_record():
     now_hour = nowDate.hour
     now_minute = nowDate.minute
     now_second = nowDate.second
+    logging.warning("####now_hour####")
+    logging.warning(now_hour)
+    logging.warning("####now_minute####")
+    logging.warning(now_minute)
+    logging.warning("####now_second####")
+    logging.warning(now_second)
     str_hh_mm_ss = str(now_hour) + ":" + str(now_minute) + \
         ":" + str(now_second)
     now_hh_mm_ss = datetime.datetime.strptime(str_hh_mm_ss, '%H:%M:%S')
-
+    # TODO: このあたりでGMT⇒JSTへの変換が必要だと思う。
+    logging.warning("####str_hh_mm_ss####")
+    logging.warning(str_hh_mm_ss)
+    logging.warning("####now_hh_mm_ss####")
+    logging.warning(now_hh_mm_ss)
     strSys_time_from = "00:00:00"
     strSys_time_to = "05:00:00"
 
     sys_time_from = datetime.datetime.strptime(strSys_time_from, '%H:%M:%S')
     sys_time_to = datetime.datetime.strptime(strSys_time_to, '%H:%M:%S')
-
+    logging.warning("####sys_time_from####")
+    logging.warning(sys_time_from)
+    logging.warning("####sys_time_to####")
+    logging.warning(sys_time_to)
     if now_hh_mm_ss >= sys_time_from and now_hh_mm_ss < sys_time_to:
         yesterday = nowDate - timedelta(1)
         yyyy_mm_dd = yesterday.strftime('%Y-%m-%d')
         str_hh = str(int(str(now_hour)) + 24)
         hh_mm_ss = str_hh + ":" + str(now_minute) + ":" + str(now_second)
+        logging.warning("####24時～29時です####")
+        logging.warning("####str_hh####")
+        logging.warning(str_hh)
 
     else:
         yyyy_mm_dd = nowDate.strftime('%Y-%m-%d')
         hh_mm_ss = nowDate.strftime('%H:%M:%S')
+
+    logging.warning("####hh_mm_ss####")
+    logging.warning(hh_mm_ss)
 
     if request.method == 'POST':
         if request.form.get("clockin_div", None) == "start":
